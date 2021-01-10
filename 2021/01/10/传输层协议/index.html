@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="风息梦泽">
+
+
+
+
+
+<title>传输层协议 | 前端技术笔记</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">风息梦泽</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">风息梦泽</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">传输层协议</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">风息梦泽</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 10, 2021&nbsp;&nbsp;9:34:18</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h2><ul>
+<li>TCP是面向连接的、可靠的、基于字节流的传输层协议</li>
+<li>UDP是一个面向无连接的传输层协议</li>
+</ul>
+<h4 id="详细区别"><a href="#详细区别" class="headerlink" title="详细区别"></a>详细区别</h4><p>1、tcp是基于连接的，可靠性高；udp是基于无连接的，可靠性较低；</p>
+<p>2、由于tcp是连接的通信，需要有三次握手、重新确认等连接过程，会有延时，实时性差；由于协议所致，安全性较高；而udp无连接，无建立连接的过程，因而实时性较强，安全略差；</p>
+<p>3、在传输相同大小的数据时，tcp首部开销20字节；udp首部开销只有8个字节，tcp报头比udp复杂，故实际包含的用户数据较少。tcp无丢包，而udp有丢包，故tcp开销大，udp开销较小；</p>
+<p>4、每条tcp连接只能是点到点的；udp支持一对一、一对多、多对一、多对多的交互通信。</p>
+<h4 id="应用场景的区别"><a href="#应用场景的区别" class="headerlink" title="应用场景的区别"></a>应用场景的区别</h4><ul>
+<li>由于TCP和UDP的特点，如果对实时性要求高和高速传输的场景下需要使用UDP；</li>
+<li>如果需要传输大量数据且对数据可靠性要求高的场景使用TCP；</li>
+<li>在可靠性要求低追求效率的情况使用UDP；</li>
+</ul>
+<h2 id="TCP三大核心"><a href="#TCP三大核心" class="headerlink" title="TCP三大核心"></a>TCP三大核心</h2><ul>
+<li><strong>面向连接</strong>：面向连接指的是客户端与服务端的连接，在双方互相通信之前，TCP需要三次握手建立连接。UDP则没有相应的建立连接的过程</li>
+<li><strong>可靠性</strong>：TCP的可靠性只要体现在<strong>有状态</strong>和<strong>可控制</strong>,UDP不可靠的原因相同，<strong>无状态</strong>和<strong>不可靠</strong></li>
+<li><strong>面向字节流</strong>：UDP数据传输基于数据报，仅仅是继承了IP层的特性，而TCP为了维护状态，将IP包变成了字节流</li>
+</ul>
+<blockquote>
+<p><strong>有状态</strong>；TCP会精准记录哪些数据发送了，被对方接受了，哪些没有，而保证数据按序到达，不允许差错 </p>
+<p><strong>可控制</strong>；意识到丢包或者网络环境差，TCP根据具体情况调整自己的行为，控制自己发送速度或重发</p>
+</blockquote>
+<h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><p>三次握手的目的是确认客户端、服务端的发送能力与接收能力</p>
+<p>最开始双方都处于CLOSE状态，然后服务端开始监听某个端口，进入LISTEN状态，等待服务器连接</p>
+<p><strong>第一次握手</strong>：客户端向服务端发送 连接报文请求， 进入SYN-SENT状态，其中TCP标志位里SYN = 1， ACK = 0， 选择一个初始的序号seq = x</p>
+<p>客户端发送数据包，服务端收到了。</p>
+<p>服务端可以确认客户端的发送能力，服务端的接收能力</p>
+<p><strong>第二次握手</strong>   服务端收到请求报文，进入SYN-RCVD状态，向客户端发送 连接确认报文， SYN = 1， ACK = 1， 确认号为 x + 1,  同时也选择一个初始号 seq = y</p>
+<p>服务端发送数据包，客户端收到了</p>
+<p>客户端可以确认服务端的发送能力和接收能力</p>
+<p>但服务端尚不能确认客户端的接受能力是否正常</p>
+<p><strong>第三次握手</strong>   客户端收到服务端的连接确认报文之后，进入ESTABLISHED状态，再向服务器 发出确认， 确认号为 seq = y + 1, 序号为 seq = x + 1,  ACK 报文段可以携带数据，不携带数据则不消耗序号</p>
+<p>客户端发送数据包，服务端收到了</p>
+<p>服务端可以确认客户端的接收能力正常</p>
+<p><strong><em>第三次握手是为了防止失效的连接请求到达服务器，让服务器打开错误连接</em></strong></p>
+<p>服务端接收到客户端的确认后，进入ESTABLISHED状态，连接建立</p>
+<p><img src="/Users/user/Pictures/img/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%88%E9%9D%99%E6%80%81%EF%BC%89.png" alt="三次握手（静态）"></p>
+<p>​    </p>
+<h2 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h2><p><strong>第一次挥手</strong> 首先客户端主动关闭，向服务端发送FIN段，并进入<code>FIN_WAIT_1</code>状态。此阶段关闭客户端到服务端的数据传送，表明自己不再向被动方传送数据。此时客户端还可以接受数据。</p>
+<p><strong>第二次挥手</strong> 服务端接收到FIN包后，通知应用进程并向客户端发送一个ACK，确认序号为收到序号+1，服务端进入<code>CLOSN_WAIT</code>状态，接收到ACK的客户端进入<code>FIN_WAIT_2</code>状态</p>
+<p><strong>第三次挥手</strong> 服务端发送一个<code>FIN</code>包，并进入<code>LAST_ACK</code>状态。用来关闭服务端到客户端的数据传送，表明不再发送数据</p>
+<p><strong>第四次挥手</strong> 客户端收到<code>FIN</code>包后， 发送一个ACK给服务端，确认序号为收到序号+1,并进入<code>TIME_WAIT</code>状态（2<code>MSL</code>），进入<code>CLOSED</code>状态</p>
+<blockquote>
+<p>注意了，这个时候，客户端需要等待两个 <code>MSL</code>(Maximum Segment Lifetime，报文最大生存时间),在这段时间内如果客户端没有收到服务端的重发请求，那么表示 <code>ACK </code>成功到达，挥手结束，否则客户端重发 ACK。</p>
+</blockquote>
+<h4 id="为什么要等待2MSL"><a href="#为什么要等待2MSL" class="headerlink" title="为什么要等待2MSL"></a>为什么要等待2MSL</h4><ul>
+<li>1 个 <code>MSL</code> 确保四次挥手中主动关闭方最后的 <code>ACK</code> 报文最终能达到对端</li>
+<li>1 个 <code>MSL</code> 确保对端没有收到 <code>ACK</code> 重传的 FIN 报文可以到达</li>
+</ul>
+<h4 id="为什么是四次挥手而不是三次"><a href="#为什么是四次挥手而不是三次" class="headerlink" title="为什么是四次挥手而不是三次"></a>为什么是四次挥手而不是三次</h4><p>因为服务端在接收到<code>FIN</code>, 往往不会立即返回<code>FIN</code>, 必须等到服务端所有的报文都发送完毕了，才能发<code>FIN</code>。</p>
+<p>因此先发一个ACK表示已经收到客户端的<code>FIN</code>，延迟一段时间才发<code>FIN</code>。这就造成了四次挥手。 <code>如果是三次挥手会有什么问题？</code> 等于说服务端将<code>ACK</code>和<code>FIN</code>的发送合并为一次挥手，长时间的延迟可能会导致客户端误以为<code>FIN</code>没有到达客户端，从而让客户端不断的重发<code>FIN</code>。</p>
+<p><img src="/Users/user/Pictures/img/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%88%E9%9D%99%E6%80%81%EF%BC%89.png" alt="四次挥手（静态）"></p>
+<h2 id="SYN-Flood"><a href="#SYN-Flood" class="headerlink" title="SYN Flood"></a>SYN Flood</h2><blockquote>
+<p>半连接队列、全连接队列、SYN Flood攻击过程、如何应对这种攻击</p>
+</blockquote>
+<h4 id="半连接队列"><a href="#半连接队列" class="headerlink" title="半连接队列"></a>半连接队列</h4><p>当客户端发送<code>SYN</code>到服务端，服务端收到以后回复<code>ACK</code>和<code>SYN</code>，状态由<code>LISTEN</code>变为<code>SYN_RCVD</code>，此时这个连接就被推入了<strong>SYN队列</strong>，也就是半连接队列。</p>
+<h4 id="全连接队列"><a href="#全连接队列" class="headerlink" title="全连接队列"></a>全连接队列</h4><p>当客户端返回<code>ACK</code>, 服务端接收后，三次握手完成。这个时候连接等待被具体的应用取走，在被取走之前，它会被推入另外一个 TCP 维护的队列，也就是全连接队列(Accept Queue)。</p>
+<h4 id="SYN-Flood攻击原理"><a href="#SYN-Flood攻击原理" class="headerlink" title="SYN Flood攻击原理"></a>SYN Flood攻击原理</h4><p>SYN Flood 属于<strong>典型的 DoS/DDoS 攻击</strong>。其攻击的原理很简单，就是用客户端在短时间内伪造大量不存在的 IP地址，并向服务端疯狂发送SYN。对于服务端而言，会产生两个危险的后果:</p>
+<ul>
+<li>处理大量的SYN包并返回对应ACK, 势必有大量连接处于SYN_RCVD状态，从而占满整个半连接队列，无法处理正常的请求。</li>
+<li>由于是不存在的 IP，服务端长时间收不到客户端的ACK，会导致服务端不断重发数据，直到耗尽服务端的资源。</li>
+</ul>
+<h4 id="如何应对"><a href="#如何应对" class="headerlink" title="如何应对"></a>如何应对</h4><p><strong>增加 SYN 连接</strong>，也就是增加半连接队列的容量。</p>
+<p><strong>减少 SYN + ACK 重试次数</strong>，避免大量的超时重发。</p>
+<p><strong>利用 SYN Cookie技术</strong>，在服务端接收到SYN后不立即分配连接资源，而是根据这个SYN计算出一个Cookie，连同第二次握手回复给客户端，在客户端回复ACK的时候带上这个Cookie值，服务端验证Cookie 合法之后才分配连接资源。</p>
+<h2 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h2><h2 id="TCP拥塞机制"><a href="#TCP拥塞机制" class="headerlink" title="TCP拥塞机制"></a>TCP拥塞机制</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>风息梦泽</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/01/10/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE/">http://example.com/2021/01/10/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"># 计算机网络</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/10/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E7%BB%A7%E6%89%BF/">对象的创建与继承</a>
+            
+            
+            <a class="next" rel="next" href="/2021/01/09/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型与原型链</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 风息梦泽 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

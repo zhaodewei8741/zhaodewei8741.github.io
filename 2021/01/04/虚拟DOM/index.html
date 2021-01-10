@@ -206,7 +206,7 @@
 <p>​    构建dom树是一个渐进过程，为达到更好的用户体验，渲染引擎会尽快将内容显示在屏幕上。会一边加载一边解析一边渲染。    </p>
 <h3 id="JS操作真实DOM的代价"><a href="#JS操作真实DOM的代价" class="headerlink" title="JS操作真实DOM的代价"></a>JS操作真实DOM的代价</h3><p>​    原生JS或JQ操作dom时，浏览器会从构建dom树开始从头到尾执行一遍流程。</p>
 <h3 id="虚拟DOM的好处"><a href="#虚拟DOM的好处" class="headerlink" title="虚拟DOM的好处"></a>虚拟DOM的好处</h3><p>​    web界面由dom树构建，当其中一部分发生变化时，其实就是对应某个dom节点发生了变化</p>
-<p>​    虚拟dom是为了解决浏览器性能问题而被设计出来的。若一次操作中有10次更新dom的动作，虚拟dom不会立即操作dom，而将10次更新的diff内容保存到本地一个js对象中，最终将这个js对象一次性attch到dom树上，再进行后续操作，避免大量武威的计算量。<strong>所以，</strong>用JS对象模拟DOM节点的好处是，页面的更新可以先全部反映在JS对象(虚拟DOM)上，操作内存中的JS对象的速度显然要更快，等更新完成后，再将最终的JS对象映射成真实的DOM，交由浏览器去绘制。</p>
+<p>​    虚拟dom是为了解决浏览器性能问题而被设计出来的。若一次操作中有10次更新dom的动作，虚拟dom不会立即操作dom，而将10次更新的diff内容保存到本地一个js对象中，最终将这个js对象一次性attch到dom树上，再进行后续操作，避免大量武威的计算量。所以，用JS对象模拟DOM节点的好处是，页面的更新可以先全部反映在JS对象(虚拟DOM)上，操作内存中的JS对象的速度显然要更快，等更新完成后，再将最终的JS对象映射成真实的DOM，交由浏览器去绘制。</p>
 
         </div>
 
@@ -244,10 +244,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/js/"># js</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -258,7 +254,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/01/09/doc/">doc</a>
+                <a class="prev" rel="prev" href="/2021/01/09/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型与原型链</a>
             
             
         </section>
